@@ -1,0 +1,10 @@
+ip-cidr, 10.32.0.0/16, XJTU-intra
+ip-cidr, 10.49.0.0/16, XJTU-intra
+ip-cidr, 10.100.1.0/24, XJTU-intra
+ip-cidr, 10.131.16.0/24, XJTU-intra
+ip-cidr, 10.176.0.0/13, XJTU-intra
+ip-cidr, 10.184.0.0/16, XJTU-intra
+ip-cidr, 10.180.0.0/16, XJTU-intra
+ip-cidr, 10.185.0.0/16, XJTU-intra
+ip-cidr, 10.186.0.0/16, XJTU-intra
+ip-cidr, 10.188.0.0/16, XJTU-intra
