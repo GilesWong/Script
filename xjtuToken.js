@@ -2,7 +2,7 @@ const $ = new Env("xjtuCardBalance");
 /**
  * Read Employee ID From Login Request
  */
-if ($request.body) {
+if ($request) {
     const req = $request;
     const reqBody = req.body;
     console.log(reqBody);
@@ -14,7 +14,7 @@ if ($request.body) {
 /**
  * Read Employee ID From Login Response
  */
-if ($response.body) {
+if ($response) {
     const rep = $response;
     const repBody = rep.body;
     console.log(repBody);
