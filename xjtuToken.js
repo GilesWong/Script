@@ -8,10 +8,10 @@ if (('undefined' !== typeof $request) && ('undefined' == typeof $response)) {
     const req = $request;
     const reqBody = req.body;
     console.log(reqBody);
-    body = JSON.parse(reqBody)
+    body = JSON.parse(reqBody);
     let id = body["acount"]; //做App的什么jb水平，拼单词都能拼错
     $.setval(id, "xjtuID");
-    $.msg("获取到XJTU ID", "ID是："+id)
+    $.msg("获取到XJTU ID", "ID是："+id);
 }
 /**
  * Read Employee ID From Login Response
@@ -21,15 +21,15 @@ if ('undefined' !== typeof $response) {
     const repBody = rep.body;
     console.log(repBody);
     body = JSON.parse(repBody);
-    var xjtuToken = body['data']['personToken']
-    console.log(xjtuToken)
+    var xjtuToken = body['data']['personToken'];
+    console.log(xjtuToken);
     if (xjtuToken) {
         $.setval(xjtuToken, "xjtuToken");
         $.msg("获取XJTU_TOKEN成功")
     }
 }
 
-$.done()
+$.done();
 
 
 

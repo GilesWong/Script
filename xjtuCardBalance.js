@@ -1,11 +1,13 @@
 const $ = new Env("xjtuCardBalance");
-const xjtuToken = $prefs.valueForKey('xjtuToken')
+const xjtuToken = $.getval("xjtuToken") || 'YourTokenHere';
+const xjtuID = $.getval("xjtuID") || 'YourXJTUEmployeeIDHere';
+
+var code = '';
 
 if (!xjtuToken) {
-    $notify('请先获取XJTU_Token')
-    $done()
+    $.msg("请先获取或填写XJTU_Token");
+    $.done()
 }
-var barkNotifyURL = `https://push.336.pw/M2HnKg7nxhS887THh5ozh7/`
 
 const codeUrl = `http://org.xjtu.edu.cn/openplatform/toon/auth/getCode?personToken=` + xjtuToken;
 const method = `GET`;
@@ -15,7 +17,7 @@ const headers = {
     'toonType': `150`,
     'User-Agent': `TLauncher/6.2.3 (iPhone; iOS 15.0; Scale/2.00)`,
     'platform': `iOS`,
-    'platformVersion': `15.0`,
+    'platformVersion': `16.1`,
     'secretKey': `18a9d512c03745a791d92630bc0888f6`,
     'Authorization': xjtuToken,
     'Host': `org.xjtu.edu.cn`,
@@ -30,9 +32,20 @@ const codeRequest = {
     headers: headers
 };
 
+function getCode() {
+    return $.http.get(codeRequest).then(response => {
+        console.log(response.statusCode + "\n\n" + response.body);
+        var res = JSON.parse(response.body);
+        if (res.data) {
+            code = res.data;
+            console.log('获取到code', code);
+        }
+    })
+}
+
 function getCardBalance() {
     var timestamp = new Date().getTime()
-    const cardInfoUrl = `http://org.xjtu.edu.cn/openplatform/toon/open/getCardInfoByEmpid?_t=` + timestamp + `&employeeno=3121351032`;
+    const cardInfoUrl = `http://org.xjtu.edu.cn/openplatform/toon/open/getCardInfoByEmpid?_t=` + timestamp + `&employeeno=` + xjtuID;
     const cardInfoHeaders = {
         'Accept': `application/json, text/plain, */*`,
         'Connection': `keep-alive`,
@@ -40,7 +53,7 @@ function getCardBalance() {
         'code': code,
         'Host': `org.xjtu.edu.cn`,
         'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 toon/6.2.3 toonType/150 msgsealType/1150 toongine/1.0.9 toongineBuild/9 platform/iOS language/zh-Hans skin/white fontIndex/0`,
-        'Referer': `http://org.xjtu.edu.cn/h5/campuscard.html?code=` + code + `&comeAcc=3121351032`,
+        'Referer': `http://org.xjtu.edu.cn/h5/campuscard.html?code=` + code + `&comeAcc=` + xjtuID,
         'Accept-Language': `zh-CN,zh-Hans;q=0.9`,
         'Accept-Encoding': `gzip, deflate`
     };
@@ -51,49 +64,27 @@ function getCardBalance() {
         headers: cardInfoHeaders
     };
 
-    $task.fetch(cardInfoRequest).then(response => {
+    return $.http.get(cardInfoRequest).then(response => {
         console.log(response.statusCode + "\n\n" + response.body);
         var res = JSON.parse(response.body)
         var balance = parseFloat(res.data.xcardBalance)
         if (balance <= 20.0) {
-            $notify('该充一卡通了！', '一卡通余额： ' + balance)
-            var barkurl = barkNotifyURL + encodeURIComponent(`该充一卡通了！`) + '/' + encodeURIComponent(`一卡通余额：` + balance)
-            console.log(barkurl)
-            var barkRequest = { url: barkurl, method: method }
-            $task.fetch(barkRequest).then(res => {
-                $done();
-            }, reason => {
-                console.log('请求Bark出错', reason)
-                $done();
-            })
+            $.msg('该充一卡通了！', '一卡通余额： ' + balance)
         } else {
-            $notify('一卡通余额 ' + res.data.xcardBalance)
-            $done();
+            $.msg('一卡通余额 ' + res.data.xcardBalance)
         }
         
     }, reason => {
         console.log(reason.error);
-        $done();
-    });
+    })
 }
 
-
-var code = ''
-
-
-$task.fetch(codeRequest).then(response => {
-    console.log(response.statusCode + "\n\n" + response.body);
-    var res = JSON.parse(response.body)
-    if (res.data) {
-        code = res.data
-        console.log('获取到code')
-    }
-    getCardBalance();
-}, reason => {
-    console.log(reason.error);
-    $notify('运行出错', reason.error)
-    $done();
-});
+(async function() {
+    await getCode();
+    await getCardBalance();
+})().catch((e) => $.msg(e.message || e)).finally(() => {
+    $.done();
+})
 
 
 
