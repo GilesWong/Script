@@ -1,8 +1,8 @@
 {
-  "id": "xream.app.sub",
-  "name": "@xream 的应用订阅",
-  "author": "@xream",
-  "icon": "https://raw.githubusercontent.com/xream/scripts/main/surge/modules/gist/asset/avatar.png",
+  "id": "giles.app.sub",
+  "name": "@giles 的应用订阅",
+  "author": "@giles",
+  "icon": "https://avatars.githubusercontent.com/u/13916856?v=4",
   "repo": "https://github.com/giles/scripts/tree/main",
   "apps": [
     {
