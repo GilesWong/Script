@@ -34,9 +34,6 @@ const tgbotToken = $.getdata("@giles.xjtuCardBalance.tgbotToken") || ''
 const tgbotChatid = $.getdata("@giles.xjtuCardBalance.tgbotChatid") || ''
 const barkURL = $.getdata("@giles.xjtuCardBalance.bark") || ''
 
-console.log(tgbotToken)
-console.log(tgbotChatid)
-
 var code = '';
 
 if (!xjtuToken) {
