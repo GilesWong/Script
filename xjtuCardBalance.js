@@ -30,12 +30,12 @@ const xjtuToken = $.getval("xjtuToken")
 const xjtuID = $.getval("xjtuID")
 const push_enabled = $.getdata("@giles.xjtuCardBalance.push_enabled") || false
 const warn_balance = $.getdata("@giles.xjtuCardBalance.warn_balance") || 20.0
-const tgbotToken = $.getdata("@giles.xjtuCardBalance.tgbot") || ''
+const tgbotToken = $.getdata("@giles.xjtuCardBalance.tgbotToken") || ''
 const tgbotChatid = $.getdata("@giles.xjtuCardBalance.tgbotChatid") || ''
 const barkURL = $.getdata("@giles.xjtuCardBalance.bark") || ''
 
-console.log(push_enabled)
-console.log($.getdata("@giles.xjtuCardBalance.push_enabled"))
+console.log(tgbotToken)
+console.log(tgbotChatid)
 
 var code = '';
 
@@ -73,7 +73,6 @@ function getCode() {
         var res = JSON.parse(response.body);
         if (res.data) {
             code = res.data;
-            console.log('获取到code', code);
         }
     })
 }
@@ -105,7 +104,7 @@ function getCardBalance() {
         var balance = parseFloat(res.data.xcardBalance)
         if (balance <= warn_balance) {
             msg = '该充一卡通了！', '一卡通余额： ' + balance
-            $.msg(msg)
+            $.msg('该充一卡通了！', '一卡通余额： ' + balance)
             if (push_enabled) {
                 if (tgbotChatid != '' && tgbotToken != "") {
                     $.http.post({
