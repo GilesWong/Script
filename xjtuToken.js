@@ -1,8 +1,10 @@
 const $ = new Env("xjtuCardBalance");
+console.log('undefined' !== typeof $request);
+console.log('undefined' !== typeof $response);
 /**
  * Read Employee ID From Login Request
  */
-if ('undefined' !== typeof $request) {
+if (('undefined' !== typeof $request) && ('undefined' == typeof $response)) {
     const req = $request;
     const reqBody = req.body;
     console.log(reqBody);
