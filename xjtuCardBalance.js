@@ -26,9 +26,13 @@ hostname = *.xjtu.edu.cn
  */
 
 const $ = new Env("xjtuCardBalance");
-const xjtuToken = $.getval("xjtuToken") || 'YourTokenHere';
-const xjtuID = $.getval("xjtuID") || 'YourXJTUEmployeeIDHere';
-
+const xjtuToken = $.getval("xjtuToken")
+const xjtuID = $.getval("xjtuID")
+const push_disabled = $.getval("@giles.xjtuCardBalance.push_disabled") || true
+const warn_balance = $.getval("@giles.xjtuCardBalance.warn_balance") || 20.0
+const tgbotToken = $.getval("@giles.xjtuCardBalance.tgbot") || ''
+const tgbotChatid = $.getval("@giles.xjtuCardBalance.tgbotChatid") || ''
+const barkURL = $.getval("@giles.xjtuCardBalance.bark") || ''
 var code = '';
 
 if (!xjtuToken) {
@@ -95,8 +99,23 @@ function getCardBalance() {
         console.log(response.statusCode + "\n\n" + response.body);
         var res = JSON.parse(response.body)
         var balance = parseFloat(res.data.xcardBalance)
-        if (balance <= 20.0) {
-            $.msg('该充一卡通了！', '一卡通余额： ' + balance)
+        if (balance <= warn_balance) {
+            msg = '该充一卡通了！', '一卡通余额： ' + balance
+            $.msg(msg)
+            if (!push_disabled) {
+                if (tgbotChatid != '' && tgbotToken != "") {
+                    $.http.post({
+                        url: 'https://api.telegram.org/bot' + tgbotToken + '/sendMessage',
+                        headers:{},
+                        body:`chat_id=${tgbotChatid}&text=${msg}`
+                    })
+                }
+                if (barkURL != '') {
+                    $.http.get({
+                        url: barkURL + "/%E8%AF%A5%E5%85%85%E4%B8%80%E5%8D%A1%E9%80%9A%E4%BA%86%EF%BC%81/%E4%B8%80%E5%8D%A1%E9%80%9A%E4%BD%99%E9%A2%9D%EF%BC%9A" + balance + "?group=xjtu&autoCopy=1&isArchive=1&icon=https%3A%2F%2Fraw.githubusercontent.com%2FGilesWong%2FScripts%2Fmain%2Fimg%2Fxjtu.png&sound=shake&level=timeSensitive",
+                    })
+                }
+            }
         } else {
             $.msg('一卡通余额 ' + res.data.xcardBalance)
         }

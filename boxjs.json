@@ -1,0 +1,66 @@
+{
+  "id": "xream.app.sub",
+  "name": "@xream 的应用订阅",
+  "author": "@xream",
+  "icon": "https://raw.githubusercontent.com/xream/scripts/main/surge/modules/gist/asset/avatar.png",
+  "repo": "https://github.com/giles/scripts/tree/main",
+  "apps": [
+    {
+      "id": "giles.xjtuCardBalance",
+      "name": "XJTU一卡通余额",
+      "descs_html": [
+        "<a href=\"https://raw.githubusercontent.com/GilesWong/Scripts/main/xjtuCardBalance.js">查看脚本</a>",
+        "<a onClick=\"window.location.reload(true);\">刷新</a>"
+      ],
+      "keys": [
+        "@giles.xjtuCardBalance.push_disabled",
+        "@giles.xjtuCardBalance.warn_balance",
+        "@giles.xjtuCardBalance.tgbot",
+        "@giles.xjtuCardBalance.bark"
+      ],
+      "author": "@Giles",
+      "repo": "https://raw.githubusercontent.com/GilesWong/Scripts/main/",
+      "settings": [
+        {
+          "id": "@giles.xjtuCardBalance.push_disabled",
+          "name": "是否发送Bark, TGBOT",
+          "val": true,
+          "type": "boolean",
+          "desc": "默认禁用"
+        },
+        {
+          "id": "@giles.xjtuCardBalance.warn_balance",
+          "name": "警告余额",
+          "val": "20",
+          "type": "number",
+          "desc": "发送警告的余额"
+        },
+        {
+          "id": "@giles.xjtuCardBalance.bark",
+          "name": "转发到 Bark/自建服务端 等",
+          "val": "",
+          "type": "textarea",
+          "desc": "形如 https://api.day.app/XXXXXXXXX， 最后请不要以“/”结尾"
+        },
+        {
+          "id": "@giles.xjtuCardBalance.tgbotToken",
+          "name": "转发到 TGBOT, 此处填写Token",
+          "val": "",
+          "type": "textarea",
+          "desc": "此处填写Token"
+        },
+        {
+          "id": "@giles.xjtuCardBalance.tgbotChatid",
+          "name": "转发到 TGBOT, 此处填写Chatid",
+          "val": "",
+          "type": "textarea",
+          "desc": "此处填写Chatid"
+        }
+      ],
+      "icons": [
+        "https://raw.githubusercontent.com/GilesWong/Scripts/main/img/xjtu.png",
+        "https://raw.githubusercontent.com/GilesWong/Scripts/main/img/xjtu.png"
+      ]
+    }
+  ]
+}
