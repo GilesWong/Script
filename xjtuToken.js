@@ -8,7 +8,7 @@ if (isRequest) {
     const req = $request;
     const body = req.body;
     console.log(req.body);
-    body = JSON.parse(responseBody)
+    body = JSON.parse(body)
     let id = body["acount"]; //做App的什么jb水平，拼单词都能拼错
     $.setval(id, "xjtuID");
     $.msg("获取到XJTU ID", "ID是："+id)
