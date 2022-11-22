@@ -15,7 +15,8 @@
       "keys": [
         "@giles.xjtuCardBalance.push_enabled",
         "@giles.xjtuCardBalance.warn_balance",
-        "@giles.xjtuCardBalance.tgbot",
+        "@giles.xjtuCardBalance.tgbotToken",
+        "@giles.xjtuCardBalance.tgbotChatid",
         "@giles.xjtuCardBalance.bark"
       ],
       "author": "@Giles",
