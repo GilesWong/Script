@@ -9,7 +9,7 @@
       "id": "giles.xjtuCardBalance",
       "name": "XJTU一卡通余额",
       "descs_html": [
-        "<a href=\"https://raw.githubusercontent.com/GilesWong/Scripts/main/xjtuCardBalance.js">查看脚本</a>",
+        "<a href=\"https://raw.githubusercontent.com/GilesWong/Scripts/main/xjtuCardBalance.js\">查看脚本</a>",
         "<a onClick=\"window.location.reload(true);\">刷新</a>"
       ],
       "keys": [
