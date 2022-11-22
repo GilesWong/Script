@@ -28,14 +28,14 @@ hostname = *.xjtu.edu.cn
 const $ = new Env("xjtuCardBalance");
 const xjtuToken = $.getval("xjtuToken")
 const xjtuID = $.getval("xjtuID")
-const push_enabled = $.getval("@giles.xjtuCardBalance.push_enabled") || false
-const warn_balance = $.getval("@giles.xjtuCardBalance.warn_balance") || 20.0
-const tgbotToken = $.getval("@giles.xjtuCardBalance.tgbot") || ''
-const tgbotChatid = $.getval("@giles.xjtuCardBalance.tgbotChatid") || ''
-const barkURL = $.getval("@giles.xjtuCardBalance.bark") || ''
+const push_enabled = $.getdata("@giles.xjtuCardBalance.push_enabled") || false
+const warn_balance = $.getdata("@giles.xjtuCardBalance.warn_balance") || 20.0
+const tgbotToken = $.getdata("@giles.xjtuCardBalance.tgbot") || ''
+const tgbotChatid = $.getdata("@giles.xjtuCardBalance.tgbotChatid") || ''
+const barkURL = $.getdata("@giles.xjtuCardBalance.bark") || ''
 
 console.log(push_enabled)
-console.log($.getval("@giles.xjtuCardBalance.push_enabled"))
+console.log($.getdata("@giles.xjtuCardBalance.push_enabled"))
 
 var code = '';
 
