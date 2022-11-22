@@ -1,3 +1,30 @@
+/*
+  使用说明：定时获取XJTU一卡通余额，并通过软件推送
+  “定时”指可以用Cron表达式指定你想运行的时间
+  已在Surge和Quantmult X上测试通过，理论上也能在Shadowrocket, Stash, Loon上跑，请自行根据下方信息填写对应软件的配置文件
+==================================Surge 配置方法================================
+[Script]
+xjtuID = type=http-request,pattern=^http:\/\/org\.xjtu\.edu\.cn\/openplatform\/toon\/auth\/loginByPwd,requires-body=1,max-size=0,debug=1,script-path=https://raw.githubusercontent.com/GilesWong/Scripts/main/xjtuToken.js,script-update-interval=0
+xjtuToken = type=http-response,pattern=^http:\/\/org\.xjtu\.edu\.cn\/openplatform\/toon\/auth\/loginByPwd,requires-body=1,max-size=0,debug=1,script-path=https://raw.githubusercontent.com/GilesWong/Scripts/main/xjtuToken.js,script-update-interval=0
+xjtuCardBalance = type=cron,cronexp="0 7,11,17 * * *",debug=1,script-path=https://raw.githubusercontent.com/GilesWong/Scripts/main/xjtuCardBalance.js
+
+
+//虽然移动交通大学到现在连登录都不愿意用HTTPS，还是明文传输用户名和密码，但是以防哪天突然想起来开HTTPS了，加一下吧
+[MITM]
+hostname = *.xjtu.edu.cn
+
+==================================Quantumult X 配置方法================================
+[rewrite_local]
+^http:\/\/org\.xjtu\.edu\.cn\/openplatform\/toon\/auth\/loginByPwd url script-response-body https://raw.githubusercontent.com/GilesWong/Scripts/main/xjtuToken.js
+^http:\/\/org\.xjtu\.edu\.cn\/openplatform\/toon\/auth\/loginByPwd url script-request-body https://raw.githubusercontent.com/GilesWong/Scripts/main/xjtuToken.js
+
+[task_local]
+0 7,11,17 * * * https://raw.githubusercontent.com/GilesWong/Scripts/main/xjtuCardBalance.js, tag=XJTUCardBalance, enabled=true
+
+[mitm]
+hostname = *.xjtu.edu.cn
+ */
+
 const $ = new Env("xjtuCardBalance");
 const xjtuToken = $.getval("xjtuToken") || 'YourTokenHere';
 const xjtuID = $.getval("xjtuID") || 'YourXJTUEmployeeIDHere';
