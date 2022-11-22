@@ -24,9 +24,9 @@
         {
           "id": "@giles.xjtuCardBalance.push_disabled",
           "name": "是否发送Bark, TGBOT",
-          "val": true,
+          "val": false,
           "type": "boolean",
-          "desc": "默认禁用"
+          "desc": "默认不发送"
         },
         {
           "id": "@giles.xjtuCardBalance.warn_balance",
