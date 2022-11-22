@@ -33,6 +33,10 @@ const warn_balance = $.getval("@giles.xjtuCardBalance.warn_balance") || 20.0
 const tgbotToken = $.getval("@giles.xjtuCardBalance.tgbot") || ''
 const tgbotChatid = $.getval("@giles.xjtuCardBalance.tgbotChatid") || ''
 const barkURL = $.getval("@giles.xjtuCardBalance.bark") || ''
+
+console.log(push_enabled)
+console.log($.getval("@giles.xjtuCardBalance.push_enabled"))
+
 var code = '';
 
 if (!xjtuToken) {
