@@ -103,7 +103,7 @@ function getCardBalance() {
         var res = JSON.parse(response.body)
         var balance = parseFloat(res.data.xcardBalance)
         if (balance <= warn_balance) {
-            msg = '该充一卡通了！', '一卡通余额： ' + balance
+            msg = '该充一卡通了！' + '\n一卡通余额： ' + balance
             $.msg('该充一卡通了！', '一卡通余额： ' + balance)
             if (push_enabled) {
                 if (tgbotChatid != '' && tgbotToken != "") {
