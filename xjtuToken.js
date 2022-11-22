@@ -1,5 +1,5 @@
 const $ = new Env("xjtuCardBalance");
-const isRequest = typeof $request != "undefined"
+const isRequest = $request != "undefined"
 console.log("是否为登录请求", isRequest);
 /**
  * Read Employee ID From Login Request
