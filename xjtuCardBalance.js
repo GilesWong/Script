@@ -28,7 +28,7 @@ hostname = *.xjtu.edu.cn
 const $ = new Env("xjtuCardBalance");
 const xjtuToken = $.getval("xjtuToken")
 const xjtuID = $.getval("xjtuID")
-const push_disabled = $.getval("@giles.xjtuCardBalance.push_disabled") || true
+const push_enabled = $.getval("@giles.xjtuCardBalance.push_enabled") || false
 const warn_balance = $.getval("@giles.xjtuCardBalance.warn_balance") || 20.0
 const tgbotToken = $.getval("@giles.xjtuCardBalance.tgbot") || ''
 const tgbotChatid = $.getval("@giles.xjtuCardBalance.tgbotChatid") || ''
@@ -102,7 +102,7 @@ function getCardBalance() {
         if (balance <= warn_balance) {
             msg = '该充一卡通了！', '一卡通余额： ' + balance
             $.msg(msg)
-            if (!push_disabled) {
+            if (push_enabled) {
                 if (tgbotChatid != '' && tgbotToken != "") {
                     $.http.post({
                         url: 'https://api.telegram.org/bot' + tgbotToken + '/sendMessage',

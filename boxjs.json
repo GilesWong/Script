@@ -13,7 +13,7 @@
         "<a onClick=\"window.location.reload(true);\">刷新</a>"
       ],
       "keys": [
-        "@giles.xjtuCardBalance.push_disabled",
+        "@giles.xjtuCardBalance.push_enabled",
         "@giles.xjtuCardBalance.warn_balance",
         "@giles.xjtuCardBalance.tgbot",
         "@giles.xjtuCardBalance.bark"
@@ -22,7 +22,7 @@
       "repo": "https://raw.githubusercontent.com/GilesWong/Scripts/main/",
       "settings": [
         {
-          "id": "@giles.xjtuCardBalance.push_disabled",
+          "id": "@giles.xjtuCardBalance.push_enabled",
           "name": "是否发送Bark, TGBOT",
           "val": false,
           "type": "boolean",
