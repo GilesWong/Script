@@ -6,9 +6,9 @@ console.log("是否为登录请求", isRequest);
  */
 if (isRequest) {
     const req = $request;
-    const body = req.body;
-    console.log(req.body);
-    body = JSON.parse(body)
+    const reqBody = req.body;
+    console.log(reqBody);
+    body = JSON.parse(reqBody)
     let id = body["acount"]; //做App的什么jb水平，拼单词都能拼错
     $.setval(id, "xjtuID");
     $.msg("获取到XJTU ID", "ID是："+id)
@@ -18,9 +18,9 @@ if (isRequest) {
  */
 if (!isRequest) {
     const rep = $response;
-    const body = rep.body;
-    console.log(body);
-    body = JSON.parse(body);
+    const repBody = rep.body;
+    console.log(repBody);
+    body = JSON.parse(repBody);
     var xjtuToken = body['data']['personToken']
     console.log(xjtuToken)
     if (xjtuToken) {
