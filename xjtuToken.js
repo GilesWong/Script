@@ -1,10 +1,8 @@
 const $ = new Env("xjtuCardBalance");
-const isRequest = $request != "undefined"
-console.log("是否为登录请求", isRequest);
 /**
  * Read Employee ID From Login Request
  */
-if (isRequest) {
+if ($request.body) {
     const req = $request;
     const reqBody = req.body;
     console.log(reqBody);
@@ -16,7 +14,7 @@ if (isRequest) {
 /**
  * Read Employee ID From Login Response
  */
-if (!isRequest) {
+if ($response.body) {
     const rep = $response;
     const repBody = rep.body;
     console.log(repBody);
@@ -25,9 +23,7 @@ if (!isRequest) {
     console.log(xjtuToken)
     if (xjtuToken) {
         $.setval(xjtuToken, "xjtuToken");
-        // $prefs.setValueForKey(xjtuToken, 'xjtuToken')
         $.msg("获取XJTU_TOKEN成功")
-        // $notify("获取XJTU_TOKEN成功")
     }
 }
 
