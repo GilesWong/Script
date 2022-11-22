@@ -1,37 +1,99 @@
 const $ = new Env("xjtuCardBalance");
-const isRequest = typeof $request != "undefined"
-console.log("是否为登录请求", isRequest);
-/**
- * Read Employee ID From Login Request
- */
-if (isRequest) {
-    const req = $request;
-    const body = req.body;
-    console.log(req.body);
-    body = JSON.parse(responseBody)
-    let id = body["acount"]; //做App的什么jb水平，拼单词都能拼错
-    $.setval(id, "xjtuID");
-    $.msg("获取到XJTU ID", "ID是："+id)
+const xjtuToken = $prefs.valueForKey('xjtuToken')
+
+if (!xjtuToken) {
+    $notify('请先获取XJTU_Token')
+    $done()
 }
-/**
- * Read Employee ID From Login Response
- */
-if (!isRequest) {
-    const rep = $response;
-    const body = rep.body;
-    console.log(body);
-    body = JSON.parse(body);
-    var xjtuToken = body['data']['personToken']
-    console.log(xjtuToken)
-    if (xjtuToken) {
-        $.setval(xjtuToken, "xjtuToken");
-        // $prefs.setValueForKey(xjtuToken, 'xjtuToken')
-        $.msg("获取XJTU_TOKEN成功")
-        // $notify("获取XJTU_TOKEN成功")
-    }
+var barkNotifyURL = `https://push.336.pw/M2HnKg7nxhS887THh5ozh7/`
+
+const codeUrl = `http://org.xjtu.edu.cn/openplatform/toon/auth/getCode?personToken=` + xjtuToken;
+const method = `GET`;
+const headers = {
+    'Connection': `keep-alive`,
+    'Accept-Encoding': `gzip, deflate`,
+    'toonType': `150`,
+    'User-Agent': `TLauncher/6.2.3 (iPhone; iOS 15.0; Scale/2.00)`,
+    'platform': `iOS`,
+    'platformVersion': `15.0`,
+    'secretKey': `18a9d512c03745a791d92630bc0888f6`,
+    'Authorization': xjtuToken,
+    'Host': `org.xjtu.edu.cn`,
+    'appVersion': `6.2.3`,
+    'Accept-Language': `zh-Hans-CN;q=1, en-CN;q=0.9`,
+    'Accept': `*/*`
+};
+
+const codeRequest = {
+    url: codeUrl,
+    method: method,
+    headers: headers
+};
+
+function getCardBalance() {
+    var timestamp = new Date().getTime()
+    const cardInfoUrl = `http://org.xjtu.edu.cn/openplatform/toon/open/getCardInfoByEmpid?_t=` + timestamp + `&employeeno=3121351032`;
+    const cardInfoHeaders = {
+        'Accept': `application/json, text/plain, */*`,
+        'Connection': `keep-alive`,
+        'Content-Type': `application/json`,
+        'code': code,
+        'Host': `org.xjtu.edu.cn`,
+        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 toon/6.2.3 toonType/150 msgsealType/1150 toongine/1.0.9 toongineBuild/9 platform/iOS language/zh-Hans skin/white fontIndex/0`,
+        'Referer': `http://org.xjtu.edu.cn/h5/campuscard.html?code=` + code + `&comeAcc=3121351032`,
+        'Accept-Language': `zh-CN,zh-Hans;q=0.9`,
+        'Accept-Encoding': `gzip, deflate`
+    };
+
+    const cardInfoRequest = {
+        url: cardInfoUrl,
+        method: method,
+        headers: cardInfoHeaders
+    };
+
+    $task.fetch(cardInfoRequest).then(response => {
+        console.log(response.statusCode + "\n\n" + response.body);
+        var res = JSON.parse(response.body)
+        var balance = parseFloat(res.data.xcardBalance)
+        if (balance <= 20.0) {
+            $notify('该充一卡通了！', '一卡通余额： ' + balance)
+            var barkurl = barkNotifyURL + encodeURIComponent(`该充一卡通了！`) + '/' + encodeURIComponent(`一卡通余额：` + balance)
+            console.log(barkurl)
+            var barkRequest = { url: barkurl, method: method }
+            $task.fetch(barkRequest).then(res => {
+                $done();
+            }, reason => {
+                console.log('请求Bark出错', reason)
+                $done();
+            })
+        } else {
+            $notify('一卡通余额 ' + res.data.xcardBalance)
+            $done();
+        }
+        
+    }, reason => {
+        console.log(reason.error);
+        $done();
+    });
 }
 
-$.done()
+
+var code = ''
+
+
+$task.fetch(codeRequest).then(response => {
+    console.log(response.statusCode + "\n\n" + response.body);
+    var res = JSON.parse(response.body)
+    if (res.data) {
+        code = res.data
+        console.log('获取到code')
+    }
+    getCardBalance();
+}, reason => {
+    console.log(reason.error);
+    $notify('运行出错', reason.error)
+    $done();
+});
 
 
 
