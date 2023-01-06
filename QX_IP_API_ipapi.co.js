@@ -1,5 +1,5 @@
 // Modified from https://raw.githubusercontent.com/KOP-XIAO/QuantumultX/master/Scripts/IP_API.js 
-
+// For https://ipapi.co/json
 if ($response.statusCode != 200) {
   $done(null);
 }
@@ -40,8 +40,8 @@ var flags = new Map([["AC","🇦🇨"],["AD","🇦🇩"],["AE","🇦🇪"],["AF"
 
 var body = $response.body;
 var obj = JSON.parse(body);
-var title =flags.get(obj['countryCode']) + ' '+ City_ValidCheck(obj['city']);
-var subtitle = obj['org'] == '' ? obj['isp'] : obj['org']
-var ip = obj['query'];
-var description = '服务商:'+obj['isp'] + '\n'+'地区:' +City_ValidCheck(obj['regionName'])+ '\n' + 'IP:'+ obj['query'] + '\n' +'时区:'+ obj['timezone'];
+var title = flags.get(obj['country_code']) + ' '+ City_ValidCheck(obj['city']);
+var subtitle = obj['org'] == '' ? obj['network'] : obj['org']
+var ip = obj['ip'];
+var description = '服务商:'+obj['org'] + '\n'+'地区:' +City_ValidCheck(obj['city'])+ '\n' + 'IP:'+ obj['ip'] + '\n' +'时区:'+ obj['timezone'];
 $done({title, subtitle, ip, description});
