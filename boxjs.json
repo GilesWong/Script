@@ -30,6 +30,13 @@
           "desc": "默认不发送"
         },
         {
+          "id": "@giles.xjtuCardBalance.XJTUID",
+          "name": "学号",
+          "val": "",
+          "type": "textarea",
+          "desc": "输入学号"
+        },
+        {
           "id": "@giles.xjtuCardBalance.warn_balance",
           "name": "警告余额",
           "val": "20",
