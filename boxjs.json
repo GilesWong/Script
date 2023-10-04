@@ -14,11 +14,11 @@
       ],
       "keys": [
         "@giles.xjtuCardBalance.push_enabled",
+        "@giles.xjtuCardBalance.XJTUID",
         "@giles.xjtuCardBalance.warn_balance",
         "@giles.xjtuCardBalance.tgbotToken",
         "@giles.xjtuCardBalance.tgbotChatid",
-        "@giles.xjtuCardBalance.bark",
-        "@giles.xjtuCardBalance.XJTUID"
+        "@giles.xjtuCardBalance.bark"
       ],
       "author": "@Giles",
       "repo": "https://raw.githubusercontent.com/GilesWong/Scripts/main/",
