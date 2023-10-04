@@ -17,7 +17,8 @@
         "@giles.xjtuCardBalance.warn_balance",
         "@giles.xjtuCardBalance.tgbotToken",
         "@giles.xjtuCardBalance.tgbotChatid",
-        "@giles.xjtuCardBalance.bark"
+        "@giles.xjtuCardBalance.bark",
+        "@giles.xjtuCardBalance.XJTUID"
       ],
       "author": "@Giles",
       "repo": "https://raw.githubusercontent.com/GilesWong/Scripts/main/",
