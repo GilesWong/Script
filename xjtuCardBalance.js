@@ -29,7 +29,7 @@ hostname = *.xjtu.edu.cn
 
 const $ = new Env("xjtuCardBalance");
 const xjtuToken = $.getval("xjtuToken")
-const xjtuID = $.getval("@giles.xjtuCardBalance.XJTUID")
+const xjtuID = $.getdata("@giles.xjtuCardBalance.XJTUIDD")
 const push_enabled = $.getdata("@giles.xjtuCardBalance.push_enabled") || false
 const warn_balance = $.getdata("@giles.xjtuCardBalance.warn_balance") || 20.0
 const tgbotToken = $.getdata("@giles.xjtuCardBalance.tgbotToken") || ''
