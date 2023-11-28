@@ -1,0 +1,12 @@
+#!name=XJTU-HTTP连接升级为HTTPS
+
+#!desc=主动升级为HTTPS防止明文传输个人信息
+
+[URL Rewrite]
+^http:\/\/opmp\.xjtu\.edu\.cn https://opmp.xjtu.edu.cn 307
+^http:\/\/org\.xjtu\.edu\.cn https://org.xjtu.edu.cn 307
+^http:\/\/hello\.xjtu\.edu\.cn https://hello.xjtu.edu.cn 307
+^http:\/\/card\.xjtu\.edu\.cn https://card.xjtu.edu.cn 307
+
+[MITM]
+hostname = %APPEND% *.xjtu.edu.cn
