@@ -1,0 +1,11 @@
+#!name=XJTU一卡通余额提醒
+
+#!desc=请搭配 https://raw.githubusercontent.com/GilesWong/Scripts/main/xjtuCardBalance.js 中的配置信息使用
+
+[Script]
+xjtuCardBalance = type=cron,cronexp="0 7,11,17 * * *",debug=1,script-path=https://raw.githubusercontent.com/GilesWong/Scripts/main/xjtuCardBalance.js,script-update-interval=86400
+xjtuID = type=http-request,pattern=^https:\/\/org\.xjtu\.edu\.cn\/openplatform\/toon\/auth\/loginByPwd,requires-body=1,max-size=0,debug=1,script-path=https://raw.githubusercontent.com/GilesWong/Scripts/main/xjtuToken.js,script-update-interval=86400
+xjtuToken = type=http-response,pattern=^https:\/\/org\.xjtu\.edu\.cn\/openplatform\/toon\/auth\/loginByPwd,requires-body=1,max-size=0,debug=1,script-path=https://raw.githubusercontent.com/GilesWong/Scripts/main/xjtuToken.js,script-update-interval=86400
+
+[MITM]
+hostname = %APPEND% org.xjtu.edu.cn
