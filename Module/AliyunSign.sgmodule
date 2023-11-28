@@ -1,3 +1,6 @@
+#!name=阿里云盘签到
+
+#!desc=脚本来自lowking, 请搭配 https://raw.githubusercontent.com/lowking/Scripts/master/ali/aliYunPanCheckIn.js 中的配置信息使用
 [Script]
 # > 阿里云盘签到
 https://auth.alipan.com/v2/account/token
