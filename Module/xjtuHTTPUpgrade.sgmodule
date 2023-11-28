@@ -1,6 +1,6 @@
 #!name=XJTU-HTTP连接升级为HTTPS
 
-#!desc=主动升级为HTTPS, 防止明文传输个人信息, 并解决Safari打开研究生管理信息系统时页面样式混乱的问题
+#!desc=主动升级为HTTPS, 防止明文传输个人信息, 并解决Safari打开研究生管理信息系统时页面样式混乱的问题(若已出现页面混乱问题, 请先清除Safari中所有以"xjtu"为关键词的网站数据)
 
 [URL Rewrite]
 ^https://gmis.xjtu.edu.cn/$ http://gmis.xjtu.edu.cn/pyxx/ 302
