@@ -1,6 +1,6 @@
 #!name=XJTU-HTTP连接升级为HTTPS
 
-#!desc=主动升级为HTTPS防止明文传输个人信息
+#!desc=主动升级为HTTPS,防止明文传输个人信息
 
 [URL Rewrite]
 ^http:\/\/opmp\.xjtu\.edu\.cn https://opmp.xjtu.edu.cn 307
