@@ -8,3 +8,9 @@ encrypted-dns-follow-outbound-mode = true
 
 [Host]
 *.steampowered.com = server:https://us-sjc.doh.sb/dns-query
+
+[Rule]
+# Steam
+DOMAIN-SUFFIX,steampowered.com,DIRECT
+DOMAIN,steamcommunity.com,Proxy
+DOMAIN-SUFFIX,steamcommunity.com,Proxy
