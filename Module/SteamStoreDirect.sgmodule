@@ -1,5 +1,5 @@
-#!name=Steam商店与社区直连
-#!desc=使Steam商店和社区的DNS查询使用境外DNS进行
+#!name=Steam商店直连
+#!desc=使Steam商店的DNS查询使用境外DNS进行，请添加`DOMAIN-SUFFIX,steampowered.com,DIRECT`来让商店走直连。
 #!category=GilesWong
 [General]
 # > 加密DNS服务器
@@ -8,4 +8,3 @@ encrypted-dns-follow-outbound-mode = true
 
 [Host]
 *.steampowered.com = server:https://us-sjc.doh.sb/dns-query
-steamcommunity.com = server:https://us-sjc.doh.sb/dns-query
