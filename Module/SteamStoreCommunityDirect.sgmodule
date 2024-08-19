@@ -1,6 +1,10 @@
 #!name=Steam商店与社区直连
 #!desc=使Steam商店和社区的DNS查询使用境外DNS进行
 #!category=GilesWong
+[General]
+# > 加密DNS服务器
+# 使加密DNS请求通过代理策略执行
+encrypted-dns-follow-outbound-mode = false
 
 [Host]
 *.steampowered.com = server:https://dns.google/dns-query
