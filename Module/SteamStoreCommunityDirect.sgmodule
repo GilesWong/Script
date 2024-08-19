@@ -1,0 +1,7 @@
+#!name=Steam商店与社区直连
+
+#!desc=使Steam商店和社区的DNS查询使用境外DNS进行
+
+[Host]
+*.steampowered.com = server:https://dns.google/dns-query
+steamcommunity.com = server:https://dns.google/dns-query
