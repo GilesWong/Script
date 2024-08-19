@@ -7,5 +7,5 @@
 encrypted-dns-follow-outbound-mode = true
 
 [Host]
-*.steampowered.com = server:https://dns.google/dns-query
-steamcommunity.com = server:https://dns.google/dns-query
+*.steampowered.com = server:https://us-sjc.doh.sb/dns-query
+steamcommunity.com = server:https://us-sjc.doh.sb/dns-query
